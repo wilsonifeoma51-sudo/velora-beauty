@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VELORA BEAUTY | Beauty for every shade</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23D8112B'/><text y='70' x='50' font-family='sans-serif' font-weight='900' font-size='60' text-anchor='middle' fill='white'>V</text></svg>">
+
+  <!-- Google Fonts: Unbounded (800, 900), Bricolage Grotesque, Permanent Marker -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;400;500;600;700&family=Permanent+Marker&family=Unbounded:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Custom Cursor Elements -->
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  <div class="cursor-outline" id="cursorOutline" aria-hidden="true"></div>
+
+  <!-- FIXED HEADER CONTAINER -->
+  <header class="fixed-header" id="mainHeader">
+    <!-- Announcement Bar 1: Shipping (Dark Grey #3B3F44) -->
+    <div class="announcement-bar-shipping">
+      <div class="shimmer-text">
+        Free standard shipping in Nigeria on orders over ₦100,000
+      </div>
+    </div>
+
+    <!-- Announcement Bar 2: Rotating Promos (Black #111111) -->
+    <div class="announcement-bar-promo" id="promoBar" role="region" aria-label="Promotions">
+      <button class="promo-arrow prev" id="promoPrev" aria-label="Previous promotion">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+
+      <div class="promo-track" id="promoTrack">
+        <div class="promo-slide active" data-index="0">
+          More savings? Say less. Shop value bundles + sets. <a href="#new-gifts" class="promo-link">SHOP NOW</a> <span class="promo-sep">|</span> <span class="promo-terms" onclick="window.showToast('Terms: Value bundles reflect standard promotional discounts across Nigerian regions.')">TERMS</span>
+        </div>
+        <div class="promo-slide" data-index="1">
+          The Holiday Gift Shop is open. Find something for everyone on your list. <a href="#new-gifts" class="promo-link">GET GIFTING</a>
+        </div>
+        <div class="promo-slide" data-index="2">
+          New: Velvet Heat Lip Gloss. Turn up the shine. <a href="#most-wanted" class="promo-link">SHOP NOW</a>
+        </div>
+      </div>
+
+      <button class="promo-arrow next" id="promoNext" aria-label="Next promotion">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    </div>
+
+    <!-- Primary Navigation: 64px White -->
+    <nav class="primary-nav" aria-label="Main Navigation">
+      <div class="nav-container">
+        <!-- Left: Logo -->
+        <div class="nav-left">
+          <a href="#" class="brand-logo" aria-label="Velora Beauty Homepage">
+            VELORA BEAUTY
+          </a>
+        </div>
+
+        <!-- Centre: Desktop Navigation Links -->
+        <ul class="nav-centre" role="menubar">
+          <li role="none"><a href="#new-gifts" role="menuitem" class="nav-link special-holiday">The Holiday Gift Shop</a></li>
+          <li role="none"><a href="#most-wanted" role="menuitem" class="nav-link">New + Bestsellers</a></li>
+          <li role="none"><a href="#most-wanted" role="menuitem" class="nav-link">Makeup</a></li>
+          <li role="none"><a href="#most-wanted" role="menuitem" class="nav-link">Skincare</a></li>
+          <li role="none"><a href="#most-wanted" role="menuitem" class="nav-link">Body</a></li>
+          <li role="none"><a href="#most-wanted" role="menuitem" class="nav-link">Hair</a></li>
+          <li role="none"><a href="#most-wanted" role="menuitem" class="nav-link">Fragrance</a></li>
+          <li role="none"><a href="#new-gifts" role="menuitem" class="nav-link tag-sale">Sale</a></li>
+          <li role="none"><a href="#feature-editorial" role="menuitem" class="nav-link">Discover</a></li>
+        </ul>
+
+        <!-- Right: Actions -->
+        <div class="nav-right">
+          <!-- Search Icon Button -->
+          <button class="nav-btn" id="searchTrigger" aria-label="Search catalog">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+
+          <!-- Account with Hi, Tega -->
+          <div class="account-badge" id="accountBtn" title="Account profile">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span class="account-name">Hi, Tega</span>
+          </div>
+
+          <!-- Wishlist Heart Button -->
+          <button class="nav-btn" id="wishlistTrigger" aria-label="Wishlist">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="heart-icon">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <span class="badge-count wishlist-count" id="wishlistCount">0</span>
+          </button>
+
+          <!-- Shopping Bag Button -->
+          <button class="nav-btn bag-btn" id="cartTrigger" aria-label="Open Shopping Bag">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="bag-icon" id="bagIcon">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span class="badge-count bag-count" id="bagCount">0</span>
+          </button>
+
+          <!-- Mobile Hamburger Menu Button -->
+          <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open navigation menu" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+      <div class="mobile-drawer-header">
+        <span class="mobile-drawer-title">VELORA BEAUTY</span>
+        <button class="drawer-close-btn" id="mobileDrawerClose" aria-label="Close menu">&times;</button>
+      </div>
+      <div class="mobile-drawer-greeting">
+        <div class="greeting-tag">Hi, Vixen</div>
+        <div class="greeting-user">Logged in as <strong>Tega</strong> · Lagos, NG</div>
+      </div>
+      <ul class="mobile-nav-links">
+        <li><a href="#new-gifts" class="mobile-nav-link special">The Holiday Gift Shop ✨</a></li>
+        <li><a href="#most-wanted" class="mobile-nav-link">New + Bestsellers</a></li>
+        <li><a href="#most-wanted" class="mobile-nav-link">Makeup</a></li>
+        <li><a href="#most-wanted" class="mobile-nav-link">Skincare</a></li>
+        <li><a href="#most-wanted" class="mobile-nav-link">Body</a></li>
+        <li><a href="#most-wanted" class="mobile-nav-link">Hair</a></li>
+        <li><a href="#most-wanted" class="mobile-nav-link">Fragrance</a></li>
+        <li><a href="#new-gifts" class="mobile-nav-link sale">Sale</a></li>
+        <li><a href="#feature-editorial" class="mobile-nav-link">Discover</a></li>
+      </ul>
+      <div class="mobile-drawer-footer">
+        <div class="currency-indicator">
+          <span>Currency: <strong>₦ (NGN)</strong></span>
+          <span class="dot-active"></span> Nationwide Delivery
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 4. HERO SECTION – FLOATING POLAROID PHOTO RAIL -->
+    <section class="hero-section" id="hero">
+      <div class="hero-header-meta">
+        <span class="hero-eyebrow">EDITORIAL CAMPAIGN · NIGERIAN BEAUTY AT HIGHEST POWER</span>
+        <h1 class="hero-title">BEAUTY FOR EVERY SHADE</h1>
+      </div>
+
+      <!-- Floating Polaroid Photo Rail Track -->
+      <div class="polaroid-rail-wrapper" id="polaroidRailWrapper">
+        <div class="polaroid-track" id="polaroidTrack">
+          <!-- CARD 1 -->
+          <div class="polaroid-card rot-neg4 float-1" data-card="1">
+            <div class="polaroid-inner">
+              <div class="polaroid-img-box">
+                <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=700&q=85" alt="Close-up beauty portrait of Black female model in red hoodie with lip gloss against cheek" loading="eager" />
+              </div>
+              <div class="polaroid-caption">Velora Red · Drop 01</div>
+            </div>
+          </div>
+
+          <!-- CARD 2 -->
+          <div class="polaroid-card rot-pos3 float-2" data-card="2">
+            <div class="polaroid-inner">
+              <div class="polaroid-img-box">
+                <img src="https://images.unsplash.com/photo-1588515724527-074a7a56616c?auto=format&fit=crop&w=700&q=85" alt="Glossy rose-pink lips with lip gloss tube held close to chin" loading="eager" />
+              </div>
+              <div class="polaroid-caption">Rose Glaze · High Shine</div>
+            </div>
+          </div>
+
+          <!-- CARD 3 -->
+          <div class="polaroid-card rot-neg2 float-3" data-card="3">
+            <div class="polaroid-inner">
+              <div class="polaroid-img-box">
+                <img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=700&q=85" alt="Ombré dark-red glossy lips with gloss tube held horizontally underneath" loading="eager" />
+              </div>
+              <div class="polaroid-caption">Ombré Velvet · Pure Heat</div>
+            </div>
+          </div>
+
+          <!-- CARD 4 -->
+          <div class="polaroid-card rot-pos5 float-4" data-card="4">
+            <div class="polaroid-inner">
+              <div class="polaroid-img-box">
+                <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=700&q=85" alt="Beautiful model wearing dark satin top with deep berry glossy lips against brown backdrop" loading="eager" />
+              </div>
+              <div class="polaroid-caption">Deep Berry · Satin Glow</div>
+            </div>
+          </div>
+
+          <!-- CARD 5 -->
+          <div class="polaroid-card rot-neg3 float-5" data-card="5">
+            <div class="polaroid-inner">
+              <div class="polaroid-img-box">
+                <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85" alt="Close-up matte cherry-red lips biting chrome lipstick tube" loading="eager" />
+              </div>
+              <div class="polaroid-caption">Cherry Bold · Matte Bullet</div>
+            </div>
+          </div>
+
+          <!-- CARD 6 -->
+          <div class="polaroid-card rot-pos4 float-1" data-card="6">
+            <div class="polaroid-inner">
+              <div class="polaroid-img-box">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=85" alt="Model holding plum cream blush compact against cheek" loading="eager" />
+              </div>
+              <div class="polaroid-caption">Plum Flush · Cream Duo</div>
+            </div>
+          </div>
+
+          <!-- CARD 7 -->
+          <div class="polaroid-card rot-neg5 float-2" data-card="7">
+            <div class="polaroid-inner">
+              <div class="polaroid-img-box">
+                <img src="https://images.unsplash.com/photo-1567473030492-533b30c5494c?auto=format&fit=crop&w=700&q=85" alt="Model in red hoodie holding lip gloss beside face" loading="eager" />
+              </div>
+              <div class="polaroid-caption">Hoodie Studio · Studio Red</div>
+            </div>
+          </div>
+
+          <!-- CARD 8 -->
+          <div class="polaroid-card rot-pos2 float-3" data-card="8">
+            <div class="polaroid-inner">
+              <div class="polaroid-img-box">
+                <img src="https://images.unsplash.com/photo-1583001809873-a128495da465?auto=format&fit=crop&w=700&q=85" alt="Bubblegum-pink shimmer gloss on full lips with tube held close" loading="eager" />
+              </div>
+              <div class="polaroid-caption">Bubblegum Shimmer · 24K Glass</div>
+            </div>
+          </div>
+
+          <!-- CARD 9 -->
+          <div class="polaroid-card rot-neg1 float-4" data-card="9">
+            <div class="polaroid-inner">
+              <div class="polaroid-img-box">
+                <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&w=700&q=85" alt="Model applying cream blush stick against bright purple backdrop" loading="eager" />
+              </div>
+              <div class="polaroid-caption">Electric Violet · Cheek Pop</div>
+            </div>
+          </div>
+
+          <!-- DUPLICATE SET FOR SEAMLESS 60s INFINITE LOOP -->
+          <div class="polaroid-card rot-neg4 float-1" aria-hidden="true">
+            <div class="polaroid-inner">
+              <div class="polaroid-img-box">
+                <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=700&q=85" alt="" />
+              </div>
+              <div class="polaroid-caption">Velora Red · Drop 01</div>
+            </div>
+          </div>
+          <div class="polaroid-card rot-pos3 float-2" aria-hidden="true">
+            <div class="polaroid-inner">
+              <div class="polaroid-img-box">
+                <img src="https://images.unsplash.com/photo-1588515724527-074a7a56616c?auto=format&fit=crop&w=700&q=85" alt="" />
+              </div>
+              <div class="polaroid-caption">Rose Glaze · High Shine</div>
+            </div>
+          </div>
+          <div class="polaroid-card rot-neg2 float-3" aria-hidden="true">
+            <div class="polaroid-inner">
+              <div class="polaroid-img-box">
+                <img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=700&q=85" alt="" />
+              </div>
+              <div class="polaroid-caption">Ombré Velvet · Pure Heat</div>
+            </div>
+          </div>
+          <div class="polaroid-card rot-pos5 float-4" aria-hidden="true">
+            <div class="polaroid-inner">
+              <div class="polaroid-img-box">
+                <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=700&q=85" alt="" />
+              </div>
+              <div class="polaroid-caption">Deep Berry · Satin Glow</div>
+            </div>
+          </div>
+          <div class="polaroid-card rot-neg3 float-5" aria-hidden="true">
+            <div class="polaroid-inner">
+              <div class="polaroid-img-box">
+                <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85" alt="" />
+              </div>
+              <div class="polaroid-caption">Cherry Bold · Matte Bullet</div>
+            </div>
+          </div>
+          <div class="polaroid-card rot-pos4 float-1" aria-hidden="true">
+            <div class="polaroid-inner">
+              <div class="polaroid-img-box">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=85" alt="" />
+              </div>
+              <div class="polaroid-caption">Plum Flush · Cream Duo</div>
+            </div>
+          </div>
+          <div class="polaroid-card rot-neg5 float-2" aria-hidden="true">
+            <div class="polaroid-inner">
+              <div class="polaroid-img-box">
+                <img src="https://images.unsplash.com/photo-1567473030492-533b30c5494c?auto=format&fit=crop&w=700&q=85" alt="" />
+              </div>
+              <div class="polaroid-caption">Hoodie Studio · Studio Red</div>
+            </div>
+          </div>
+          <div class="polaroid-card rot-pos2 float-3" aria-hidden="true">
+            <div class="polaroid-inner">
+              <div class="polaroid-img-box">
+                <img src="https://images.unsplash.com/photo-1583001809873-a128495da465?auto=format&fit=crop&w=700&q=85" alt="" />
+              </div>
+              <div class="polaroid-caption">Bubblegum Shimmer · 24K Glass</div>
+            </div>
+          </div>
+          <div class="polaroid-card rot-neg1 float-4" aria-hidden="true">
+            <div class="polaroid-inner">
+              <div class="polaroid-img-box">
+                <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&w=700&q=85" alt="" />
+              </div>
+              <div class="polaroid-caption">Electric Violet · Cheek Pop</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Handwritten Red "xo" Accent in Bottom-Left -->
+      <div class="hero-handwritten-xo" aria-hidden="true">
+        <span>xo</span>
+      </div>
+
+      <!-- Hero Centered CTA with Upward Red Fill Animation -->
+      <div class="hero-cta-wrapper">
+        <a href="#most-wanted" class="btn btn-sharp-hero" id="heroShopNow">
+          <span class="btn-text">SHOP NOW</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 5. MOST WANTED PRODUCTS -->
+    <section class="collection-section section-white reveal-on-scroll" id="most-wanted">
+      <div class="section-container">
+        <!-- Section Header with Heading and Circular Arrow Controls -->
+        <div class="section-header-row">
+          <div class="section-heading-box">
+            <span class="section-eyebrow">HIGH PERFORMANCE FORMULAS</span>
+            <h2 class="section-title">Velora’s most wanted</h2>
+          </div>
+          <div class="carousel-nav-arrows">
+            <button class="carousel-arrow prev" id="wantedPrev" aria-label="Previous products" disabled>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button class="carousel-arrow next" id="wantedNext" aria-label="Next products">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Horizontal Product Carousel -->
+        <div class="carousel-viewport" id="wantedViewport">
+          <div class="product-cards-track" id="wantedTrack">
+            <!-- PRODUCT 1 -->
+            <article class="product-card" data-product-id="mw-1">
+              <div class="product-media-box">
+                <span class="product-badge">Bestseller</span>
+                <button class="product-wishlist-btn" aria-label="Add to wishlist" data-product-id="mw-1">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                </button>
+                <img src="https://images.unsplash.com/photo-1629198688000-71f23e745b6e?auto=format&fit=crop&w=700&q=85" alt="Skin Flex Soft Matte Foundation bottle" class="product-img" loading="lazy" />
+              </div>
+              <div class="product-info-box">
+                <h3 class="product-title">Skin Flex Soft Matte Foundation</h3>
+                <div class="product-details">50 shades · <span class="stars">★★★★☆</span></div>
+                <div class="product-price">₦80,200.00</div>
+                <div class="product-swatches" aria-label="Available shades">
+                  <span class="swatch active" style="background-color: #E8C4A6;" title="Warm Almond #E8C4A6"></span>
+                  <span class="swatch" style="background-color: #A8704F;" title="Rich Cocoa #A8704F"></span>
+                </div>
+                <button class="btn btn-add-bag" data-id="mw-1" data-name="Skin Flex Soft Matte Foundation" data-price="80200" data-img="https://images.unsplash.com/photo-1629198688000-71f23e745b6e?auto=format&fit=crop&w=200&q=80">
+                  Add to Bag
+                </button>
+              </div>
+            </article>
+
+            <!-- PRODUCT 2 -->
+            <article class="product-card" data-product-id="mw-2">
+              <div class="product-media-box">
+                <span class="product-badge">Exclusive</span>
+                <button class="product-wishlist-btn" aria-label="Add to wishlist" data-product-id="mw-2">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                </button>
+                <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85" alt="Bold Stick Lipstick + Lip Liner Duo in sleek red finish" class="product-img" loading="lazy" />
+              </div>
+              <div class="product-info-box">
+                <h3 class="product-title">Bold Stick Lipstick + Lip Liner Duo</h3>
+                <div class="product-details">Value ₦75,200</div>
+                <div class="product-price">₦67,700.00</div>
+                <div class="product-swatches" aria-label="Available shades">
+                  <span class="swatch active" style="background-color: #D8112B;" title="Velora Red #D8112B"></span>
+                  <span class="swatch" style="background-color: #8F0719;" title="Deep Oxblood #8F0719"></span>
+                </div>
+                <button class="btn btn-add-bag" data-id="mw-2" data-name="Bold Stick Lipstick + Lip Liner Duo" data-price="67700" data-img="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=200&q=80">
+                  Add to Bag
+                </button>
+              </div>
+            </article>
+
+            <!-- PRODUCT 3 -->
+            <article class="product-card" data-product-id="mw-3">
+              <div class="product-media-box">
+                <span class="product-badge">New Scent</span>
+                <button class="product-wishlist-btn" aria-label="Add to wishlist" data-product-id="mw-3">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                </button>
+                <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=700&q=85" alt="Silk Drop Hydrating Body Milk bottle" class="product-img" loading="lazy" />
+              </div>
+              <div class="product-info-box">
+                <h3 class="product-title">Silk Drop Hydrating Body Milk</h3>
+                <div class="product-details">Sweet Bloom · 6 scents</div>
+                <div class="product-price">₦60,200.00</div>
+                <div class="product-swatches" aria-label="Available shades">
+                  <span class="swatch active" style="background-color: #B48BE0;" title="Lilac Petal #B48BE0"></span>
+                  <span class="swatch" style="background-color: #FFFFFF; border: 1px solid #CCC;" title="Pure Cream #FFFFFF"></span>
+                </div>
+                <button class="btn btn-add-bag" data-id="mw-3" data-name="Silk Drop Hydrating Body Milk" data-price="60200" data-img="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=200&q=80">
+                  Add to Bag
+                </button>
+              </div>
+            </article>
+
+            <!-- PRODUCT 4 -->
+            <article class="product-card" data-product-id="mw-4">
+              <div class="product-media-box">
+                <span class="product-badge">New Scent</span>
+                <button class="product-wishlist-btn" aria-label="Add to wishlist" data-product-id="mw-4">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                </button>
+                <img src="https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=85" alt="All-Over Body Mist spray bottle" class="product-img" loading="lazy" />
+              </div>
+              <div class="product-info-box">
+                <h3 class="product-title">All-Over Body Mist</h3>
+                <div class="product-details">Sweet Bloom · 2 sizes · 5 scents</div>
+                <div class="product-price">From ₦33,500.00</div>
+                <div class="product-swatches" aria-label="Available shades">
+                  <span class="swatch active" style="background-color: #B48BE0;" title="Sweet Violet #B48BE0"></span>
+                  <span class="swatch" style="background-color: #E0A7D6;" title="Blossom Glow #E0A7D6"></span>
+                </div>
+                <button class="btn btn-add-bag" data-id="mw-4" data-name="All-Over Body Mist" data-price="33500" data-img="https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=200&q=80">
+                  Add to Bag
+                </button>
+              </div>
+            </article>
+
+            <!-- PRODUCT 5 -->
+            <article class="product-card" data-product-id="mw-5">
+              <div class="product-media-box">
+                <span class="product-badge">Bestseller</span>
+                <button class="product-wishlist-btn" aria-label="Add to wishlist" data-product-id="mw-5">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                </button>
+                <img src="https://images.unsplash.com/photo-1588515724527-074a7a56616c?auto=format&fit=crop&w=700&q=85" alt="Glass Glaze Lip Gloss" class="product-img" loading="lazy" />
+              </div>
+              <div class="product-info-box">
+                <h3 class="product-title">Glass Glaze Lip Gloss</h3>
+                <div class="product-details">20 shades · <span class="stars">★★★★☆</span></div>
+                <div class="product-price">₦38,500.00</div>
+                <div class="product-swatches" aria-label="Available shades">
+                  <span class="swatch active" style="background-color: #D8112B;" title="Spiced Cherry #D8112B"></span>
+                  <span class="swatch" style="background-color: #FF5FA6;" title="Electric Pink #FF5FA6"></span>
+                </div>
+                <button class="btn btn-add-bag" data-id="mw-5" data-name="Glass Glaze Lip Gloss" data-price="38500" data-img="https://images.unsplash.com/photo-1588515724527-074a7a56616c?auto=format&fit=crop&w=200&q=80">
+                  Add to Bag
+                </button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. NEW + HOLIDAY GIFTS -->
+    <section class="collection-section section-white reveal-on-scroll" id="new-gifts">
+      <div class="section-container">
+        <!-- Section Header with Subtitle and Circular Arrow Controls -->
+        <div class="section-header-row">
+          <div class="section-heading-box">
+            <h2 class="section-title">New + holiday gifts</h2>
+            <p class="section-subtitle">Fresh drops and sets to gift (or keep).</p>
+          </div>
+          <div class="carousel-nav-arrows">
+            <button class="carousel-arrow prev" id="giftsPrev" aria-label="Previous gifts" disabled>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button class="carousel-arrow next" id="giftsNext" aria-label="Next gifts">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Horizontal Product Carousel for Holiday -->
+        <div class="carousel-viewport" id="giftsViewport">
+          <div class="product-cards-track" id="giftsTrack">
+            <!-- HOLIDAY 1 -->
+            <article class="product-card" data-product-id="hg-1">
+              <div class="product-media-box">
+                <span class="product-badge">New</span>
+                <button class="product-wishlist-btn" aria-label="Add to wishlist" data-product-id="hg-1">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                </button>
+                <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=700&q=85" alt="12 Days of Velora Advent Calendar" class="product-img" loading="lazy" />
+              </div>
+              <div class="product-info-box">
+                <h3 class="product-title">12 Days of Velora Advent Calendar</h3>
+                <div class="product-details">12 minis · Limited edition</div>
+                <div class="product-price-row">
+                  <span class="product-price">₦190,000.00</span>
+                  <span class="price-strikethrough">₦284,000.00</span>
+                </div>
+                <button class="btn btn-add-bag" data-id="hg-1" data-name="12 Days of Velora Advent Calendar" data-price="190000" data-img="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=200&q=80">
+                  Add to Bag
+                </button>
+              </div>
+            </article>
+
+            <!-- HOLIDAY 2 -->
+            <article class="product-card" data-product-id="hg-2">
+              <div class="product-media-box">
+                <span class="product-badge">New</span>
+                <button class="product-wishlist-btn" aria-label="Add to wishlist" data-product-id="hg-2">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                </button>
+                <img src="https://images.unsplash.com/photo-1571875257727-256c39da42af?auto=format&fit=crop&w=700&q=85" alt="Whipped Butter Body Cream with Shea jar" class="product-img" loading="lazy" />
+              </div>
+              <div class="product-info-box">
+                <h3 class="product-title">Whipped Butter Body Cream with Shea</h3>
+                <div class="product-details">Guava Glow · 6 scents · <span class="stars">★★★★☆</span></div>
+                <div class="product-price-row">
+                  <span class="product-price">₦46,000.00</span>
+                </div>
+                <button class="btn btn-add-bag" data-id="hg-2" data-name="Whipped Butter Body Cream with Shea" data-price="46000" data-img="https://images.unsplash.com/photo-1571875257727-256c39da42af?auto=format&fit=crop&w=200&q=80">
+                  Add to Bag
+                </button>
+              </div>
+            </article>
+
+            <!-- HOLIDAY 3 -->
+            <article class="product-card" data-product-id="hg-3">
+              <div class="product-media-box">
+                <span class="product-badge">New</span>
+                <button class="product-wishlist-btn" aria-label="Add to wishlist" data-product-id="hg-3">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                </button>
+                <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=700&q=85" alt="Gloss Squad 4-Piece Lip Set" class="product-img" loading="lazy" />
+              </div>
+              <div class="product-info-box">
+                <h3 class="product-title">Gloss Squad 4-Piece Lip Set</h3>
+                <div class="product-details"><span class="stars">★★★★☆</span></div>
+                <div class="product-price-row">
+                  <span class="product-price">₦49,000.00</span>
+                  <span class="price-strikethrough">₦84,000.00</span>
+                </div>
+                <button class="btn btn-add-bag" data-id="hg-3" data-name="Gloss Squad 4-Piece Lip Set" data-price="49000" data-img="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=200&q=80">
+                  Add to Bag
+                </button>
+              </div>
+            </article>
+
+            <!-- HOLIDAY 4 -->
+            <article class="product-card" data-product-id="hg-4">
+              <div class="product-media-box">
+                <span class="product-badge">New</span>
+                <button class="product-wishlist-btn" aria-label="Add to wishlist" data-product-id="hg-4">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                </button>
+                <img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=85" alt="Petite Body Lotion Travel Trio" class="product-img" loading="lazy" />
+              </div>
+              <div class="product-info-box">
+                <h3 class="product-title">Petite Body Lotion Travel Trio</h3>
+                <div class="product-details"><span class="stars">★★★★☆</span></div>
+                <div class="product-price-row">
+                  <span class="product-price">₦35,000.00</span>
+                  <span class="price-strikethrough">₦54,000.00</span>
+                </div>
+                <button class="btn btn-add-bag" data-id="hg-4" data-name="Petite Body Lotion Travel Trio" data-price="35000" data-img="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=200&q=80">
+                  Add to Bag
+                </button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. FEATURE SECTION A – SHINE. HEAT. RESULT. -->
+    <section class="feature-editorial section-grey reveal-on-scroll" id="feature-editorial">
+      <div class="editorial-container">
+        <!-- Left Side: Large Premium Beauty Photograph -->
+        <div class="editorial-media-column">
+          <div class="clip-reveal-frame" id="clipFrameA">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85" alt="Model holding a plum cream blush duo compact against cheek" class="editorial-img parallax-target" loading="lazy" />
+          </div>
+        </div>
+
+        <!-- Right Side: Editorial Copy & Black CTA -->
+        <div class="editorial-content-column">
+          <div class="stagger-group">
+            <span class="editorial-eyebrow">THE LIP MATRIX</span>
+            <h2 class="editorial-heading">Shine. Heat. Result.</h2>
+            <p class="editorial-body">
+              Everything for a full lip look, made to work for you. Liner, gloss and a little extra heat, in one easy reach.
+            </p>
+            <div class="editorial-cta-box">
+              <a href="#most-wanted" class="btn btn-sharp-black">
+                <span class="btn-text">SHOP LIPS</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. FEATURE SECTION B – BEAUTY FOR ALL -->
+    <section class="feature-editorial section-white reveal-on-scroll" id="feature-beauty-for-all">
+      <div class="editorial-container reversed-order">
+        <!-- Left Side: Copy -->
+        <div class="editorial-content-column">
+          <div class="stagger-group">
+            <span class="editorial-eyebrow">OUR PHILOSOPHY</span>
+            <h2 class="editorial-heading">Velora is about beauty for all</h2>
+            <p class="editorial-body">
+              We make products that do the work for you. No extra steps, no compromises. Every shade is thought through, from the first swatch to the last.
+            </p>
+            <div class="editorial-cta-box">
+              <a href="#footer" class="btn btn-sharp-black">
+                <span class="btn-text">MORE ABOUT US</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Large Premium Beauty Photograph -->
+        <div class="editorial-media-column">
+          <div class="clip-reveal-frame" id="clipFrameB">
+            <img src="https://images.unsplash.com/photo-1588515724527-074a7a56616c?auto=format&fit=crop&w=1200&q=85" alt="Glossy pink lips with pink shimmer lip gloss tube held close" class="editorial-img parallax-target" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. FULL-WIDTH BEAUTY CAMPAIGN BANNER -->
+    <section class="campaign-banner reveal-on-scroll" id="campaign-banner">
+      <div class="banner-image-container">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=1920&q=85" alt="Glamorous Black beauty model with sleek ponytail and deep berry glossy lips against warm studio backdrop" class="banner-img" />
+        <div class="banner-overlay"></div>
+      </div>
+      <div class="banner-content-container">
+        <div class="banner-text-box">
+          <span class="banner-eyebrow">VELORA SIGNATURE COMPLEXION</span>
+          <h2 class="banner-headline">YOUR GLOW,<br>YOUR RULES</h2>
+          <p class="banner-subline">Shades made for every skin tone, from first swipe to last.</p>
+          <div class="banner-cta">
+            <a href="#most-wanted" class="btn btn-sharp-white">
+              <span class="btn-text">SHOP NOW</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 10. FOOTER -->
+  <footer class="site-footer" id="footer">
+    <div class="footer-inner">
+      <!-- Top Section: Brand & Link Columns & Newsletter -->
+      <div class="footer-top-grid">
+        <!-- Col 1: Brand Info -->
+        <div class="footer-brand-col">
+          <div class="footer-logo">VELORA BEAUTY</div>
+          <p class="footer-tagline">Beauty for every shade. Crafted with unapologetic precision for Nigerian beauty lovers and global icons.</p>
+          <div class="footer-currency-tag">
+            <span class="tag-pill">Market: Nigeria · ₦ NGN</span>
+          </div>
+        </div>
+
+        <!-- Col 2: Customer Service -->
+        <div class="footer-links-col">
+          <h4 class="footer-links-title">CUSTOMER SERVICE</h4>
+          <ul class="footer-nav-list">
+            <li><a href="#" class="footer-link">Contact us</a></li>
+            <li><a href="#" class="footer-link">Shipping information</a></li>
+            <li><a href="#" class="footer-link">Returns</a></li>
+            <li><a href="#" class="footer-link">Track your order</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Help -->
+        <div class="footer-links-col">
+          <h4 class="footer-links-title">HELP</h4>
+          <ul class="footer-nav-list">
+            <li><a href="#" class="footer-link">FAQs</a></li>
+            <li><a href="#" class="footer-link">Payment methods</a></li>
+            <li><a href="#" class="footer-link">Order support</a></li>
+            <li><a href="#" class="footer-link">Size and shade guide</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: About -->
+        <div class="footer-links-col">
+          <h4 class="footer-links-title">ABOUT</h4>
+          <ul class="footer-nav-list">
+            <li><a href="#" class="footer-link">Our story</a></li>
+            <li><a href="#" class="footer-link">Beauty for all</a></li>
+            <li><a href="#" class="footer-link">Our ingredients</a></li>
+            <li><a href="#" class="footer-link">Careers</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 5: Follow -->
+        <div class="footer-links-col">
+          <h4 class="footer-links-title">FOLLOW</h4>
+          <ul class="footer-nav-list">
+            <li><a href="https://instagram.com" target="_blank" rel="noopener" class="footer-link">Instagram</a></li>
+            <li><a href="https://tiktok.com" target="_blank" rel="noopener" class="footer-link">TikTok</a></li>
+            <li><a href="https://pinterest.com" target="_blank" rel="noopener" class="footer-link">Pinterest</a></li>
+            <li><a href="https://facebook.com" target="_blank" rel="noopener" class="footer-link">Facebook</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter Column -->
+        <div class="footer-newsletter-col">
+          <h4 class="newsletter-heading">Down for more? We got you!</h4>
+          <p class="newsletter-desc">Be the first to hear about midnight drops, secret formula launches and VIP Lagos events.</p>
+          
+          <form class="newsletter-form" id="newsletterForm" novalidate>
+            <div class="newsletter-input-group">
+              <input type="email" id="newsletterEmail" class="newsletter-input" placeholder="Enter your email address" required />
+              <button type="submit" class="btn btn-newsletter-submit">SUBSCRIBE</button>
+            </div>
+            <label class="newsletter-consent">
+              <input type="checkbox" id="newsletterConsent" required />
+              <span>I agree to receive Velora emails and accept the privacy policy.</span>
+            </label>
+            <div class="newsletter-feedback" id="newsletterFeedback" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Giant Footer Wordmark -->
+      <div class="giant-wordmark-container" id="giantWordmarkContainer">
+        <div class="giant-wordmark" id="giantWordmark" aria-label="VELORA">
+          <span class="letter" data-letter="V">V</span>
+          <span class="letter" data-letter="E">E</span>
+          <span class="letter" data-letter="L">L</span>
+          <span class="letter" data-letter="O">O</span>
+          <span class="letter" data-letter="R">R</span>
+          <span class="letter" data-letter="A">A</span>
+        </div>
+      </div>
+
+      <!-- Legal Bottom Row -->
+      <div class="footer-legal-row">
+        <p class="footer-legal-text">© 2026 Velora Beauty. All rights reserved. · Nigeria · English</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SEARCH OVERLAY MODAL -->
+  <div class="modal-overlay" id="searchModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="search-modal-card">
+      <div class="search-modal-header">
+        <div class="search-input-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="search" id="searchInput" placeholder="Search foundation, gloss, blush, sets..." autofocus />
+        </div>
+        <button class="modal-close-btn" id="searchClose" aria-label="Close search">&times;</button>
+      </div>
+      <div class="search-results-area" id="searchResultsArea">
+        <div class="search-hint">Type to search Velora’s collection...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WISHLIST DRAWER MODAL -->
+  <div class="drawer-overlay" id="wishlistDrawer" aria-hidden="true">
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <h3>YOUR FAVOURITES (<span id="wishlistModalCount">0</span>)</h3>
+        <button class="drawer-close-btn" id="wishlistClose">&times;</button>
+      </div>
+      <div class="drawer-body" id="wishlistItemsList">
+        <div class="drawer-empty-state">
+          <p>Your wishlist is currently empty.</p>
+          <a href="#most-wanted" class="btn btn-sharp-black" onclick="document.getElementById('wishlistClose').click()">DISCOVER PRODUCTS</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHOPPING BAG SLIDE-OVER DRAWER -->
+  <div class="drawer-overlay" id="cartDrawer" aria-hidden="true">
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <h3>SHOPPING BAG (<span id="cartModalCount">0</span>)</h3>
+        <button class="drawer-close-btn" id="cartClose">&times;</button>
+      </div>
+
+      <!-- Shipping Progress Indicator Bar (Free standard shipping in Nigeria over ₦100,000) -->
+      <div class="free-shipping-tracker">
+        <div class="tracker-message" id="shippingTrackerMsg">
+          Add <strong>₦100,000.00</strong> more to qualify for <strong>FREE shipping in Nigeria</strong>!
+        </div>
+        <div class="tracker-bar-bg">
+          <div class="tracker-bar-fill" id="shippingBarFill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Cart Items List -->
+      <div class="drawer-body" id="cartItemsList">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+
+      <!-- Cart Drawer Footer -->
+      <div class="drawer-footer" id="cartDrawerFooter">
+        <div class="cart-subtotal-row">
+          <span>Subtotal</span>
+          <span class="subtotal-amount" id="cartSubtotal">₦0.00</span>
+        </div>
+        <div class="cart-shipping-note">Taxes and delivery calculated at checkout.</div>
+        <button class="btn btn-sharp-red btn-checkout" id="checkoutBtn">
+          CHECKOUT NOW · <span id="checkoutTotal">₦0.00</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
